@@ -3,61 +3,208 @@
 @tailwind utilities;
 
 :root {
-  --background: 210 20% 98%;
-  --foreground: 215 25% 27%;
-
-  --primary: 210 25% 25%;
-  --primary-foreground: 0 0% 100%;
-
-  --secondary: 204 70% 53%;
-  --secondary-foreground: 0 0% 100%;
-
-  --muted: 220 14% 96%;
-  --muted-foreground: 215 25% 40%;
-
-  --accent: 204 70% 53%;
-  --accent-foreground: 0 0% 100%;
-
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%;
-
-  --border: 220 13% 91%;
-  --input: 220 13% 91%;
-  --ring: 215 25% 27%;
-
-  --radius: 0.5rem;
-}
-
-.dark {
-  --background: 215 25% 15%;
-  --foreground: 0 0% 95%;
-
-  --primary: 210 25% 25%;
-  --primary-foreground: 0 0% 100%;
-
-  --secondary: 204 70% 53%;
-  --secondary-foreground: 0 0% 100%;
-
-  --muted: 215 25% 20%;
-  --muted-foreground: 215 25% 65%;
-
-  --accent: 204 70% 40%;
-  --accent-foreground: 0 0% 100%;
-
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%;
-
-  --border: 215 25% 25%;
-  --input: 215 25% 25%;
-  --ring: 215 25% 65%;
+  --yabatech-green: #006838;
+  --yabatech-dark-green: #004d2a;
+  --yabatech-light-green: #3c9d70;
+  --yabatech-accent: #ffd700;
+  --yabatech-gray: #f0f2f5;
+  --yabatech-text: #333333;
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-gray-50;
+  }
+}
+
+/* Sleek button styles */
+.btn-primary {
+  @apply bg-[var(--yabatech-green)] text-white hover:bg-[var(--yabatech-dark-green)] transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
+}
+
+.btn-accent {
+  @apply bg-[var(--yabatech-accent)] text-[var(--yabatech-dark-green)] font-medium hover:brightness-95 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
+}
+
+/* Card styles */
+.card {
+  @apply bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100;
+}
+
+/* Location marker and controls */
+.current-location-marker {
+  background: transparent;
+}
+
+.current-location-icon {
+  width: 24px;
+  height: 24px;
+  background-color: var(--yabatech-accent, #f59e0b);
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.current-location-icon::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.location-control,
+.location-method-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: white;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 20px;
+  margin-bottom: 6px;
+  padding: 0;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.location-control:hover,
+.location-method-control:hover {
+  background: #f4f4f4;
+  transform: scale(1.05);
+}
+
+.location-control:active,
+.location-method-control:active {
+  transform: scale(0.95);
+}
+
+.location-control {
+  background: var(--yabatech-green);
+  color: white;
+}
+
+.location-control:hover {
+  background: var(--yabatech-dark-green);
+}
+
+.location-control:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  background: #ccc;
+}
+
+.location-spinner {
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.slide-up {
+  animation: slideUp 0.5s ease-in-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--yabatech-green);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--yabatech-dark-green);
+}
+
+/* Animation styles for SVG paths */
+path.animate-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+
+/* Card styling enhancement */
+.card {
+  background-color: white;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Custom scrollbar styling */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(241, 245, 249, 0.5);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(203, 213, 225, 0.5);
+  border-radius: 10px;
+  transition: background-color 0.3s;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(148, 163, 184, 0.7);
+}
+
+/* For Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(203, 213, 225, 0.5) rgba(241, 245, 249, 0.5);
+}
+
+/* Map page enhancements */
+@media (max-width: 768px) {
+  .leaflet-control-zoom {
+    margin-bottom: 70px !important;
+  }
+  
+  .leaflet-control-attribution {
+    font-size: 8px !important;
   }
 }
 

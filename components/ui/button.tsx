@@ -10,26 +10,41 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+          "bg-[var(--yabatech-green)] text-white shadow hover:bg-[var(--yabatech-dark-green)] transition-all duration-200",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "bg-red-600 text-white shadow-sm hover:bg-red-700",
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "border border-[var(--yabatech-green)] text-[var(--yabatech-green)] bg-transparent shadow-sm hover:bg-[var(--yabatech-green)]/10",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "bg-[var(--yabatech-light-green)] text-white shadow-sm hover:bg-[var(--yabatech-green)]/80",
+        accent:
+          "bg-[var(--yabatech-accent)] text-[var(--yabatech-dark-green)] font-medium shadow-sm hover:brightness-95",
+        ghost: "hover:bg-[var(--yabatech-green)]/10 hover:text-[var(--yabatech-green)]",
+        link: "text-[var(--yabatech-green)] underline-offset-4 hover:underline",
+        white: "bg-white text-[var(--yabatech-green)] shadow hover:bg-white/90",
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+        default: "h-10 px-5 py-2",
+        sm: "h-9 rounded-md px-4 text-xs",
+        lg: "h-12 rounded-md px-8 text-base",
+        icon: "h-10 w-10",
       },
+      rounded: {
+        default: "rounded-md",
+        full: "rounded-full",
+        none: "rounded-none",
+      },
+      shadow: {
+        default: "shadow",
+        lg: "shadow-lg hover:shadow-xl",
+        none: "",
+      }
     },
     defaultVariants: {
       variant: "default",
       size: "default",
+      rounded: "default",
+      shadow: "default",
     },
   }
 )
@@ -41,11 +56,11 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, rounded, shadow, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(buttonVariants({ variant, size, rounded, shadow, className }))}
         ref={ref}
         {...props}
       />

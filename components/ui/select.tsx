@@ -83,6 +83,9 @@ const SelectContent = React.forwardRef<
       position={position}
       {...props}
     >
+      <span className="sr-only" id="select-title">
+        Select options
+      </span>
       <SelectScrollUpButton />
       <SelectPrimitive.Viewport
         className={cn(
@@ -90,6 +93,7 @@ const SelectContent = React.forwardRef<
           position === "popper" &&
             "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]"
         )}
+        aria-labelledby="select-title"
       >
         {children}
       </SelectPrimitive.Viewport>
